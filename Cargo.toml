@@ -1,13 +1,12 @@
 [package]
 
 name = "get_errno"
-version = "0.0.1"
+version = "0.0.2"
 authors = ["Jakub Stasiak <jakub@stasiak.at>"]
 license = "MIT"
-description = "Extract errno from std::io::Error"
+description = "Extracting errno from std::io::Error"
 readme = "README.md"
-repository = "https://github.com/iron/iron"
-documentation = "http://ironframework.io/doc/iron/"
+repository = "https://github.com/jstasiak/rust-get_errno"
 
 
 [dependencies]
