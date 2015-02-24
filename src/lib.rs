@@ -10,7 +10,7 @@ use std::str::FromStr;
 extern crate regex;
 use regex::Regex;
 
-static re: Regex = regex!(r"Os\((\d+)\)");
+static re: Regex = regex!(r"repr: Os\((\d+)\)");
 
 fn get_errno(e: &Error) -> Option<i32> {
     let s = format!("{:?}", e);
@@ -33,4 +33,16 @@ fn returns_errno_when_present() {
 #[test]
 fn returns_nothing_when_no_errno() {
     assert_eq!(get_errno(&Error::new(ErrorKind::Other, "xxx", None)), None);
+}
+
+#[test]
+fn returns_nothing_when_no_errno_even_though_it_looks_like_errno1() {
+    assert_eq!(get_errno(&Error::new(ErrorKind::Other, "Os(321)", None)), None);
+}
+
+#[test]
+fn returns_nothing_when_no_errno_even_though_it_looks_like_errno2() {
+    assert_eq!(
+        get_errno(&Error::new(ErrorKind::Other, "xxx", Some("Os(45)".to_string()))),
+        None);
 }
