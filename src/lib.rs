@@ -1,3 +1,4 @@
+#![feature(core)]
 #![feature(io)]
 #![feature(plugin)]
 #![plugin(regex_macros)]
@@ -10,11 +11,11 @@ use std::str::FromStr;
 extern crate regex;
 use regex::Regex;
 
-static re: Regex = regex!(r"repr: Os\((\d+)\)");
+static RE: Regex = regex!(r"repr: Os\((\d+)\)");
 
 fn get_errno(e: &Error) -> Option<i32> {
     let s = format!("{:?}", e);
-    match re.captures(&s) {
+    match RE.captures(&s) {
         None => None,
         Some(captures) => {
             match captures.at(1) {
